@@ -2,7 +2,7 @@
 [cluster lsf]
     FormLayout = selectionpanel
     Category = Infrastructure
-
+    #IconUrl = https://github.com/CycleCloudCommunity/spectrum-symphony/raw/master/icon.png
     Autoscale = $Autoscale
 
     [[node defaults]]
@@ -26,7 +26,9 @@
         lsf.lsf_top = /usr/share/lsf
         lsf.lsf_logdir = /usr/share/lsf/log
         lsf.admin.home = /shared/home/lsfadmin
-
+        lsf.use_entitlement = true
+        lsf.entitlement_file = lsf_std_entitlement.dat 
+        lsf.accept_license = true
         cyclecloud.selinux.policy = permissive
 
 

@@ -14,6 +14,14 @@ Users must provide LSF binaries:
 
 which belong in the lsf project `blobs/` directory.
 
+### Installation with Entitlement
+
+To use an entitlement file with your installation.
+
+1. Add the entitlement file to the */blobs* 
+1. Add the entitlement file name to the files list in *project.ini* e.g. `Files = lsf_std_entitlement.dat` 
+1. Set `lsf.use_entitlement = true` and `lsf.entitlement_file = lsf_std_entitlement.dat` to the lsf configuration in *lsf.txt*.
+
 ## Start a LSF Cluster
 
 This repo contains the [cyclecloud project](https://docs.microsoft.com/en-us/azure/cyclecloud/projects).  To get started with LSF:
@@ -156,7 +164,7 @@ Any host factory attributes can be provided in this file as an override.
         "nodearray" : ["String" , "gpu"],
         "ngpus" : ["Numeric", "1"]
       },
-    "customScriptUri": "https://clustermanage.blob.core.windows.net/utilities/scripts/user_data.sh"
+       "customScriptUri": "https://clustermanage.blob.core.windows.net/utilities/scripts/user_data.sh"
     }
    ]
 }

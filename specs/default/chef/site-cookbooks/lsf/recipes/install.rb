@@ -8,6 +8,7 @@ lsf_version = node['lsf']['version']
 lsf_kernel = node['lsf']['kernel']
 lsf_arch = node['lsf']['arch']
 clustername = node['lsf']['clustername']
+accept_license = node['lsf']['accept_license']
 
 lsf_product = "lsf#{lsf_version}_#{lsf_kernel}-#{lsf_arch}"
 lsf_install = "lsf#{lsf_version}_lsfinstall_linux_#{lsf_arch}"
@@ -24,6 +25,14 @@ jetpack_download "#{lsf_product}.tar.Z" do
     not_if { ::File.exist?("#{tar_dir}/#{lsf_product}.tar.Z") }
 end
 
+if node['lsf']['use_entitlement']
+    jetpack_download node['lsf']['entitlement_file'] do
+        project "lsf"
+        dest tar_dir
+        not_if { ::File.exist?("#{tar_dir}/#{node['lsf']['entitlement_file']}") }
+    end
+end
+
 execute "untar_installers" do 
     command "gunzip #{lsf_install}.tar.Z && tar -xf #{lsf_install}.tar"
     cwd tar_dir
@@ -33,7 +42,10 @@ end
 template "#{tar_dir}/lsf#{lsf_version}_lsfinstall/lsf.install.config" do
     source 'conf/install.config.erb'
     variables lazy {{
-      :master_list => node[:lsf][:master_list].nil? ? node[:hostname] : node[:lsf][:master_list]
+      :master_list => node[:lsf][:master_list].nil? ? node[:hostname] : node[:lsf][:master_list],
+      :use_entitlement => node['lsf']['use_entitlement'],
+      :entitlement_file => "#{tar_dir}/#{node['lsf']['entitlement_file']}",
+      :accept_license => accept_license
     }}
 end
 
