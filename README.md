@@ -31,7 +31,7 @@ This project requires running Azure CycleCloud version 7.7.4 or later.
 
 ## Supported Scenarios
 
-### Externally Managed Master Node(s)
+### Externally Managed Master Node (Scenario 1)
 
 The most common introductory approach is to manually configure LSF master nodes
 to work with the CycleCloud LSF cluster type. The cluster type is available in 
@@ -40,9 +40,9 @@ a master node(s), it's assumed that is a pre-existing resource.
 
 This cluster also requires that the user creates a VM image with LSF pre-installed
 in a slave configuration. To facilitate this we supply some automation using 
-_Packer_ to create this image. These tools can be found in the `/vm-image`
+_Packer_ to create this image. These tools can be found in the [_/vm-image_](vm-image/README.md)
 
-### Fully Managed Cluster
+### Fully Managed Cluster (Scenario 2)
 
 CycleCloud has an example project that can deploy a fully managed LSF cluster to
 Azure. 

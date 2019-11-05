@@ -19,7 +19,6 @@ def get_node_id_legacy():
     instance_id = cyclecloud_dict["instance"]["id"].strip()
     query_filter = urllib.quote("(ClusterName===\"" + cluster_name + "\"&&InstanceId===\"" + instance_id + "\")")
     nodes_output = check_output(["curl", "-k", "-u", username + ":" + password, web_server + "/db/Cloud.Node?attr=NodeId&f=" + query_filter + "&format=json"])
-    print nodes_output
     nodes = json.loads(nodes_output)
     return nodes[0]["NodeId"]
 
